@@ -18,15 +18,17 @@ class ArticleCrudController extends AbstractCrudController
         return Article::class;
     }
 
+   
     
     public function configureFields(string $pageName): iterable
     {
+        $datetime = new \Datetime('now');
         yield TextField::new('title');
         yield SlugField::new('slug')->setTargetFieldName('title'); //targetFieldName permet de se référencer au champ title puisque le slug reprend le title
         yield TextEditorField::new('content');
         yield TextEditorField::new('featuredText');
         yield DateTimeField::new('createdAt')->hideOnForm();
-        yield DateTimeField::new('updatedAt')->hideOnForm();  //hideOnForm permet de cacher le champ du formulaire de création et d'édition
+        yield DateTimeField::new('updatedAt')->hideOnForm();
     }
     
 }

@@ -9,9 +9,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Model\TimestampedInterface;
 
+
+
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 
-class Article implements TimestampedInterface 
+
+class Article implements TimestampedInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -49,6 +52,7 @@ class Article implements TimestampedInterface
     {
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    
     }
 
     public function getId(): ?int
