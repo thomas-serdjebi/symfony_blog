@@ -24,8 +24,9 @@ class Category
     #[ORM\Column(length: 10)]
     private ?string $color = null;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]
     private Collection $articles;
+    //le mappedby permet de lier les articles et les catégories
 
     public function __construct()
     {
@@ -95,5 +96,13 @@ class Category
         $this->articles->removeElement($article);
 
         return $this;
+    }
+
+    // Permet de corriger l'erreur Object of class App\Entity\Category could not be converted to string
+    // dans le formulaire des articles pour le champ catégorie
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }
